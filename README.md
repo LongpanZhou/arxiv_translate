@@ -4,8 +4,7 @@ An in-browser PDF viewer and translator. Put any PDF URL after the site
 address and it renders the document and translates it into the language of
 your choice — no upload, no backend, no API key.
 
-**Live:** <https://longpanzhou.github.io/> · this repo just redirects there
-(see [below](#this-repo)).
+**Live:** <https://longpanzhou.github.io/>
 
 ```
 https://longpanzhou.github.io/arxiv.org/pdf/1706.03762
@@ -45,8 +44,8 @@ Everything runs client-side:
 1. **Render** — [`pdfjs-dist`](https://github.com/mozilla/pdf.js) draws every
    page to a canvas. Standard fonts and CJK CMaps are pulled from a CDN so
    glyphs render correctly.
-2. **Reassemble** — `layout.ts` turns pdf.js's flat list of positioned text
-   fragments back into lines and then paragraph-ish **blocks**, each with a
+2. **Reassemble** — flat lists of positioned text fragments from pdf.js are
+   rebuilt into lines and then paragraph-ish **blocks**, each with a
    bounding box.
 3. **Classify** — a content heuristic marks each block as prose or
    *keep-as-is*. Equations, numeric table cells, symbol-heavy fragments and
@@ -67,19 +66,8 @@ hard to tell apart from prose and may still be replaced. For a faithful
 re-typeset PDF you need a server-side tool such as
 [PDFMathTranslate / pdf2zh](https://github.com/Byaidu/PDFMathTranslate).
 
-## This repo
+## Source
 
-The implementation currently lives in the main site repo
-([`LongpanZhou.github.io`](https://github.com/LongpanZhou/LongpanZhou.github.io),
-under `src/pdf/`). This repo contains only a redirect:
-
-- `index.html` / `404.html` forward
-  `longpanzhou.github.io/arxiv_translate/<path>` to
-  `longpanzhou.github.io/<path>`, so old links keep working.
-
-To serve it: enable GitHub Pages for this repo from the `main` branch root —
-no build step.
-
-## License
-
-MIT
+The implementation lives in the main site repo,
+[`LongpanZhou.github.io`](https://github.com/LongpanZhou/LongpanZhou.github.io),
+under `src/pdf/`.
