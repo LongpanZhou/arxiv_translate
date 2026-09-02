@@ -11,6 +11,8 @@ https://longpanzhou.github.io/arxiv.org/pdf/1706.03762
                               └──────────── any PDF URL ───────────┘
 ```
 
+![The viewer showing an arXiv paper with the language picker open](docs/screenshot.png)
+
 ## Usage
 
 Prefix a PDF URL with the site address:
