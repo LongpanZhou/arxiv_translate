@@ -13,6 +13,13 @@ https://longpanzhou.github.io/arxiv.org/pdf/1706.03762
 
 ![The viewer showing an arXiv paper with the language picker open](docs/screenshot.png)
 
+### Result
+
+Original page on the left, translation on the right. Prose is translated;
+the BLEU-score table and the equations are left exactly as they were.
+
+![Side-by-side: English page and its Traditional Chinese translation, with the results table untouched](docs/result.png)
+
 ## Usage
 
 Prefix a PDF URL with the site address:
