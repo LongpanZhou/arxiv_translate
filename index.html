@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>arXiv Translate</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://longpanzhou.github.io/" />
+    <script>
+      // This project lives on the main site. Forward
+      //   /arxiv_translate/<anything>  ->  https://longpanzhou.github.io/<anything>
+      // so e.g. /arxiv_translate/arxiv.org/pdf/1706.03762 opens the viewer.
+      (function () {
+        var base = '/arxiv_translate/';
+        var path = window.location.pathname;
+        var rest = path.indexOf(base) === 0 ? path.slice(base.length) : '';
+        window.location.replace(
+          'https://longpanzhou.github.io/' +
+            rest +
+            window.location.search +
+            window.location.hash
+        );
+      })();
+    </script>
+    <meta http-equiv="refresh" content="0; url=https://longpanzhou.github.io/" />
+  </head>
+  <body>
+    <p>
+      Redirecting to
+      <a href="https://longpanzhou.github.io/">longpanzhou.github.io</a>&hellip;
+    </p>
+  </body>
+</html>
