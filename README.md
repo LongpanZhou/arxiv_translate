@@ -2,7 +2,7 @@
 
 An in-browser PDF viewer and translator. Put any PDF URL after the site
 address and it renders the document and translates it into the language of
-your choice — no upload, no backend, no API key.
+your choice — no upload, no backend. Translation uses GLM (Z.ai).
 
 **Live:** <https://longpanzhou.github.io/>
 
@@ -32,19 +32,21 @@ Prefix a PDF URL with the site address:
 
 Then:
 
-1. Pick a target language (or type any Google Translate language code).
+1. Pick a target language (or type any language name or code the model understands).
 2. Click **Translate**.
 3. Toggle between **Original** and **Translate** — the latter shows the
    original page beside a translated copy with the text swapped in place.
 
 The address bar at the top is editable; **Copy link** gives you a shareable
-URL for the current document.
+URL for the current document. The key is never part of the link.
 
 ### Requirements
 
-The PDF host must send permissive CORS headers
-(`Access-Control-Allow-Origin`). arXiv does. Hosts that don't will show a
-"could not load" message with a direct-open link.
+- Translation runs through GLM (Z.ai) via a server-side proxy, so visitors need
+  no API key. The proxy is set up for local development only for now.
+- The PDF host must send permissive CORS headers
+  (`Access-Control-Allow-Origin`). arXiv does. Hosts that don't will show a
+  "could not load" message with a direct-open link.
 
 ## How it works
 
@@ -59,10 +61,11 @@ Everything runs client-side:
 3. **Classify** — a content heuristic marks each block as prose or
    *keep-as-is*. Equations, numeric table cells, symbol-heavy fragments and
    equation numbers are left untouched so the original pixels show through.
-4. **Translate** — prose blocks are sent to the public Google Translate
-   endpoints (`translate.googleapis.com` / `clients5.google.com`), with
-   MyMemory as a fallback, chunked and throttled. Results are mapped back to
-   their block positions.
+4. **Translate** — prose blocks are sent to the chat completions API of the
+   GLM model (`glm-4.5-flash`), one
+   request per page, with the key you provided. The
+   model returns a JSON array with one translation per block, which is mapped
+   back to the block positions.
 5. **Show** — in the "Translate" view each translated block is drawn in place
    over the original page; figures, tables and formulas are never covered.
 
